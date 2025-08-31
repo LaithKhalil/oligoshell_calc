@@ -4,14 +4,19 @@ whitenoise
 psycopg2-binary
 dj-database-url
 python-dotenv
+
+# Django add-ons
 django-csp
 django-meta
 django-allauth
 django-crispy-forms
 crispy-bootstrap5
 django-widget-tweaks
+django-recaptcha
+
+# Utilities / math
 requests
 numpy
 scipy
-django-recaptcha
 PyJWT
+cryptography
