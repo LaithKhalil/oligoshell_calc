@@ -117,8 +117,10 @@ ACCOUNT_FORMS = {
             'signup': 'oligocalc.forms.CustomSignupForm',
 #             'signup': 'allauth.socialaccount.forms.SignupForm'
 }
-RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY')
-RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')
+RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY', '')
+RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY', '')
+RECAPTCHA_TESTING = os.getenv('RECAPTCHA_TESTING', 'False') == 'True'
+
 
 
 # CSRF_COOKIE_SECURE = True
