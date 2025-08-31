@@ -3,7 +3,13 @@ gunicorn
 whitenoise
 psycopg2-binary
 dj-database-url
-django-csp
 python-dotenv
+django-csp
 django-meta
 django-allauth
+django-crispy-forms
+crispy-bootstrap5
+django-widget-tweaks
+requests
+numpy
+scipy
