@@ -169,7 +169,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # NEW: include the repo's assets folder in static search paths
-STATICFILES_DIRS = [BASE_DIR / 'assets']
+STATICFILES_DIRS = [
+    BASE_DIR / 'assets']
+    BASE_DIR / 'layout',
 
 # WhiteNoise (already added earlier)
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
