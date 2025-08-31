@@ -168,15 +168,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# NEW: include the repo's assets folder in static search paths
+# include both top-level static folders
 STATICFILES_DIRS = [
-    BASE_DIR / 'assets']
+    BASE_DIR / 'assets',
     BASE_DIR / 'layout',
+]
 
-# WhiteNoise (already added earlier)
+# WhiteNoise
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
