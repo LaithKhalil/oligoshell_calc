@@ -6,3 +6,4 @@ dj-database-url
 django-csp
 python-dotenv
 django-meta
+django-allauth
