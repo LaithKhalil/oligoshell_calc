@@ -13,3 +13,4 @@ django-widget-tweaks
 requests
 numpy
 scipy
+django-recaptcha
