@@ -344,18 +344,11 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 
-<script>
-  function sendHeight() {
-    var h = Math.max(
-      document.documentElement.scrollHeight,
-      document.body.scrollHeight
-    );
-    window.parent.postMessage({ type: 'oligo-height', height: h }, '*');
-  }
-  new ResizeObserver(sendHeight).observe(document.body);
-  window.addEventListener('load', sendHeight);
-</script>
-<style>html,body{overflow-y:visible; overflow-x:hidden;}</style>
+<script src="https://cdn.jsdelivr.net/npm/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script>
+<style>
+  /* prevent inner scrollbars */
+  html, body { overflow-x:hidden; overflow-y:visible; }
+</style>
 
   </body>
 </html>
