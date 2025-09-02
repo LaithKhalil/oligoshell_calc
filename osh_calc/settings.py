@@ -76,6 +76,7 @@ CONTENT_SECURITY_POLICY = {
         # allow loading scripts from common CDNs we used/need
         "script-src": [
             SELF,
+            UNSAFE_INLINE,
             "https://cdn.jsdelivr.net",
             "https://cdnjs.cloudflare.com",
             "https://unpkg.com",
