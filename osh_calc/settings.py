@@ -72,6 +72,9 @@ CONTENT_SECURITY_POLICY = {
         "frame-ancestors": [
             "https://*.duda.co",
             "https://*.multiscreensite.com",
+            "https://laithagency.responsivewebsitebuilder.io",
+            "https://kbdna.com",
+            "https://www.kbdna.com",
         ],
         # allow loading scripts from common CDNs we used/need
         "script-src": [
@@ -166,6 +169,9 @@ RECAPTCHA_TESTING = os.getenv('RECAPTCHA_TESTING', 'False') == 'True'
 CSRF_TRUSTED_ORIGINS = [
     "https://*.duda.co",
     "https://*.multiscreensite.com",
+    "https://laithagency.responsivewebsitebuilder.io",
+    "https://kbdna.com",
+    "https://www.kbdna.com",
 ]
 
 # Make cookies usable in a third-party iframe (required)
