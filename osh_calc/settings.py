@@ -63,14 +63,41 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-from csp.constants import SELF
+from csp.constants import SELF, UNSAFE_INLINE
 
 CONTENT_SECURITY_POLICY = {
     "DIRECTIVES": {
         "default-src": [SELF],
+        # allow Duda to embed your app
         "frame-ancestors": [
             "https://*.duda.co",
             "https://*.multiscreensite.com",
+        ],
+        # allow loading scripts from common CDNs we used/need
+        "script-src": [
+            SELF,
+            "https://cdn.jsdelivr.net",
+            "https://cdnjs.cloudflare.com",
+            "https://unpkg.com",
+        ],
+        # allow CSS from CDNs and inline <style> blocks in templates
+        "style-src": [
+            SELF,
+            UNSAFE_INLINE,
+            "https://cdn.jsdelivr.net",
+            "https://cdnjs.cloudflare.com",
+            "https://unpkg.com",
+        ],
+        # fonts from your static files, CDNs, and data: URIs
+        "font-src": [
+            SELF,
+            "https://unpkg.com",
+            "data:",
+        ],
+        # images from self + data URIs (favicons, inline svgs, etc.)
+        "img-src": [
+            SELF,
+            "data:",
         ],
     }
 }
