@@ -134,10 +134,17 @@ RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY', '')
 RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY', '')
 RECAPTCHA_TESTING = os.getenv('RECAPTCHA_TESTING', 'False') == 'True'
 
+# Allow your app to be embedded & post from Duda origins
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.duda.co",
+    "https://*.multiscreensite.com",
+]
 
-
-# CSRF_COOKIE_SECURE = True
-# SESSION_COOKIE_SECURE = True
+# Make cookies usable in a third-party iframe (required)
+CSRF_COOKIE_SAMESITE = 'None'
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SECURE = True
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
