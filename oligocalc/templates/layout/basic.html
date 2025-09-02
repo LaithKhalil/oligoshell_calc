@@ -369,36 +369,50 @@
   });
 </script>
 
-    <style>
-  /* Hide the left menu sidebar */
-  #layout-menu {
-    display: none !important;
-  }
 
-  /* Hide the top navbar/header */
-  .layout-navbar {
-    display: none !important;
-  }
+<style>
+  /* Hide header, footer, and sidebar.  Expand calculator to fill space.
+  /* 1) Hide chrome */
+  #layout-menu { display: none !important; }
+  .layout-navbar { display: none !important; }
+  .content-footer { display: none !important; }
 
-  /* Hide the footer */
-  .content-footer {
-    display: none !important;
-  }
-
-  /* stretch content to full width when sidebar is gone */
-  .layout-page {
-    margin-left: 0 !important;
-  }
-
-  /* make sure the content area fills horizontally */
+  /* 2) Remove the left offset that Sneat adds when a menu exists */
+  .layout-page,
   .content-wrapper {
     margin-left: 0 !important;
-    padding-left: 1rem;  /* tweak if you want some breathing room */
-    padding-right: 1rem;
+    padding-left: 0 !important;
   }
 
+  /* Sneat adds offsets via state classes on <html>/<body> */
+  .layout-menu-fixed .layout-page,
+  .layout-menu-expanded .layout-page,
+  .layout-menu-collapsed .layout-page {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  /* 3) Make the main container use full width (Bootstrap’s container-xxl has a max-width) */
+  .container-xxl {
+    max-width: 100% !important;
+  }
 </style>
 
+<script>
+  // 4) Belt-and-suspenders: remove menu state classes & inline-reset offsets at runtime
+  document.addEventListener('DOMContentLoaded', function () {
+    var roots = [document.documentElement, document.body];
+    ['layout-menu-fixed','layout-menu-expanded','layout-menu-collapsed'].forEach(function(cls){
+      roots.forEach(function(el){ el && el.classList && el.classList.remove(cls); });
+    });
+
+    var lp = document.querySelector('.layout-page');
+    if (lp) { lp.style.marginLeft = '0'; lp.style.paddingLeft = '0'; }
+
+    var cw = document.querySelector('.content-wrapper');
+    if (cw) { cw.style.marginLeft = '0'; cw.style.paddingLeft = '0'; }
+  });
+</script>
 
   </body>
 </html>
