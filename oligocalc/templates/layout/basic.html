@@ -351,32 +351,45 @@
 </style>
 
 <script>
-  // Ask parent to resize when content changes (works with iframe-resizer)
   (function () {
-    function triggerResize() {
-      try { if (window.parentIFrame) { window.parentIFrame.size(); } } catch (e) {}
+    function currentHeight() {
+      return Math.max(
+        document.documentElement.scrollHeight,
+        document.body.scrollHeight,
+        document.documentElement.offsetHeight,
+        document.body.offsetHeight
+      );
     }
 
-    // Initial nudge after load
+    function sendHeight() {
+      var h = currentHeight();
+
+      // 1) If iframe-resizer is loaded on parent, use it
+      try { if (window.parentIFrame && window.parentIFrame.size) { window.parentIFrame.size(); } } catch (e) {}
+
+      // 2) Also postMessage height (works even if iframe-resizer isn't active)
+      try { window.parent.postMessage({ type: 'oligo-height', height: h }, '*'); } catch (e) {}
+    }
+
+    // Initial + delayed nudges
     window.addEventListener('load', function () {
-      triggerResize();
-      // extra nudges in case late assets expand layout
-      setTimeout(triggerResize, 100);
-      setTimeout(triggerResize, 400);
-      setTimeout(triggerResize, 1200);
+      sendHeight();
+      setTimeout(sendHeight, 100);
+      setTimeout(sendHeight, 400);
+      setTimeout(sendHeight, 1200);
     });
 
-    // Nudge on any DOM changes (results being inserted, tabs opening, etc.)
-    var mo = new MutationObserver(function () { triggerResize(); });
+    // React to DOM changes (results expanding, tabs opening, etc.)
+    var mo = new MutationObserver(sendHeight);
     mo.observe(document.body, { childList: true, subtree: true, attributes: true, characterData: true });
 
-    // If your form has an id, ping right after submit as well
+    // Extra nudge on form submit
     var form = document.querySelector('form#calc-form') || document.querySelector('form');
     if (form) {
       form.addEventListener('submit', function () {
-        setTimeout(triggerResize, 50);
-        setTimeout(triggerResize, 300);
-        setTimeout(triggerResize, 1000);
+        setTimeout(sendHeight, 50);
+        setTimeout(sendHeight, 300);
+        setTimeout(sendHeight, 1000);
       });
     }
   })();
